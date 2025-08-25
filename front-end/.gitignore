@@ -1,0 +1,14 @@
+# Ignora a pasta de módulos do Node.js
+node_modules/
+
+# Ignora arquivos de debug e logs
+*.log
+
+# Ignora arquivos de build e cache
+.expo/
+build/
+dist/
+
+# Ignora segredos
+*.env
+.env.local

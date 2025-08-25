@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "FItness Journey",
+    "slug": "fitness-journey",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}
