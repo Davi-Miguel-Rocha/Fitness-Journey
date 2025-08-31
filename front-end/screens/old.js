@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import StepCounter from '../components/StepCounter';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <StepCounter />
+      <Text style={styles.title}>Fitness Journey</Text>
     </View>
   );
 }
@@ -13,8 +12,13 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#4B0082',
     alignItems: 'center',
     justifyContent: 'center',
-     backgroundColor: '#ffffff',
+  },
+  title: {
+    fontSize: 48,
+    fontWeight: 'bold',
+    color: '#FFD700',
   },
 });
