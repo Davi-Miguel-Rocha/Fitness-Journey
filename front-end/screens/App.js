@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import StepCounter from '../components/StepCounter';
+import StepCounter from '../components/Pedometer';
 
 export default function App() {
   return (
