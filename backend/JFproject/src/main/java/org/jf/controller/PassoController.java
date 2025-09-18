@@ -22,6 +22,13 @@ public class PassoController{
 
     // Mapping signfica mapeamento.
     //Serve para caso alguém mande uma requisição pra cá POST/passos/registrar. ele use esse método.
+    
+    // Endpoint para registrar passos
+    // URL: POST /passos/registrar
+    // Parâmetros:
+    //   usuarioId -> ID do usuário que está andando (Long)
+    //   quantidadePassos -> número de passos a registrar (int)
+    // Retorno: objeto Passo registrado em JSON
     @PostMapping("/registrar")
     public Passo registrar(@RequestParam Long usuarioId, @RequestParam int quantidadePassos){
 
@@ -30,3 +37,4 @@ public class PassoController{
 
 
 }
+
