@@ -5,8 +5,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Image, Animated, Easing } from 'react-native';
 import * as Progress from 'react-native-progress';
 
-// Importa sua imagem da logo
-const appLogo = require('../assets/images/logo.png'); 
 
 export default function SplashScreen({ onFinishLoading }) {
   const [loadingProgress, setLoadingProgress] = useState(0);
