@@ -7,7 +7,8 @@ import {
   StyleSheet,
   ScrollView,
   KeyboardAvoidingView,
-  Platform
+  Platform,
+  Alert
 } from 'react-native';
 
 export default function SignUpScreen({ navigation }) {
@@ -21,6 +22,8 @@ export default function SignUpScreen({ navigation }) {
     navigation.navigate('Pedometer'); // ou substitua pelo nome da próxima tela
   };
 
+  
+  //A PARTIR DAQUI É FRONT END PURO
   return (
     <KeyboardAvoidingView
       style={styles.container}
