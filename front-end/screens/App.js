@@ -1,8 +1,3 @@
-<<<<<<< Updated upstream
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import StepCounter from '../components/StepCounter';
-=======
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -10,7 +5,6 @@ import SplashScreen from './Splash';
 import LoginScreen from './Login';
 import SignUpScreen from './Cadastro.js';
 import PedometerScreen from '../components/Pedometer.js';
->>>>>>> Stashed changes
 
 // Cria o navegador de pilha para gerenciar as telas
 const Stack = createNativeStackNavigator();
