@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Pedometer } from 'expo-sensors';
 import { StyleSheet, Text, View } from 'react-native';
+import * as Progress from 'react-native-progress';
+
+const dailyGoal = 5000;
 
 export default function StepCounter() {
   const [isPedometerAvailable, setIsPedometerAvailable] = useState('checking');
@@ -10,7 +13,6 @@ export default function StepCounter() {
     let subscription;
 
     const subscribe = async () => {
-      // 1. Pede e verifica a permissão
       const isAvailable = await Pedometer.isAvailableAsync();
       const permissionStatus = await Pedometer.getPermissionsAsync();
 
@@ -22,7 +24,6 @@ export default function StepCounter() {
         }
       }
 
-      // Se a permissão for concedida, inicia o contador
       setIsPedometerAvailable(String(isAvailable));
       if (isAvailable) {
         subscription = Pedometer.watchStepCount(result => {
@@ -34,18 +35,30 @@ export default function StepCounter() {
     subscribe();
 
     return () => {
-      if (subscription) {
+      if (subscription) { // ADDED: Check if subscription exists before removing it
         subscription.remove();
       }
     };
   }, []);
 
+  const progress = currentStepCount / dailyGoal;
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Contador de Passos</Text>
-      <Text style={styles.text}>
-        {isPedometerAvailable === 'checking' ? 'Carregando...' : currentStepCount}
+      <Text style={styles.title}>Contador de Passos</Text>
+      <Text style={styles.stepCountText}>
+        {currentStepCount}
       </Text>
+      <Text style={styles.goalText}>Meta: {dailyGoal} passos</Text>
+
+      <Progress.Bar
+        progress={progress}
+        width={200}
+        color={'#FFD700'}
+        unfilledColor={'#4B0082'}
+        style={styles.progressBar}
+      />
+
       {isPedometerAvailable === 'not granted' && (
         <Text style={styles.errorText}>Permissão para atividade física negada.</Text>
       )}
@@ -58,15 +71,28 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
   },
-  text: {
+  title: {
     fontSize: 24,
-    color: '#000',
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  stepCountText: {
+    fontSize: 48,
+    fontWeight: 'bold',
+  },
+  goalText: {
+    fontSize: 16,
+    color: '#888',
+    marginBottom: 20,
+  },
+  progressBar: {
+    marginTop: 10,
   },
   errorText: {
     fontSize: 16,
     color: 'red',
     marginTop: 10,
-  }
+  },
 });
