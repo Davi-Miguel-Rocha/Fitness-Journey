@@ -1,137 +1,91 @@
+// screens/Cadastro.js
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
-  Alert
-} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
-export default function SignUpScreen({ navigation }) {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [age, setAge] = useState('');
-  const [password, setPassword] = useState('');
+const Cadastro = () => {
+  const [nome, setNome] = useState('');
 
-  const handleNext = () => {
-    // Por enquanto só navega sem salvar
-    navigation.navigate('Pedometer'); // ou substitua pelo nome da próxima tela
+  const handleCadastro = async () => {
+    // Verifique se o campo nome não está vazio
+    if (!nome.trim()) {
+      Alert.alert('Erro', 'Por favor, insira o nome.');
+      return;
+    }
+
+
+  try {
+    const response = await fetch(`http://192.168.15.123:8080/usuarios?nome=${encodeURIComponent(nome)}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+
+      if (response.ok) {
+        Alert.alert('Sucesso', 'Usuário cadastrado com sucesso!');
+        setNome(''); // Limpa o campo após o sucesso
+      } else {
+        const errorData = await response.json();
+        Alert.alert('Erro no Cadastro', errorData.message || 'Ocorreu um erro no servidor.');
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Erro de Conexão', 'Não foi possível conectar ao servidor. Tente novamente mais tarde.');
+    }
   };
 
-  
-  //A PARTIR DAQUI É FRONT END PURO
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    >
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <Text style={styles.welcomeText}>Bem-vindo à jornada!</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Cadastro de Usuário</Text>
+      
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu nome"
+        placeholderTextColor="#999"
+        value={nome}
+        onChangeText={setNome}
+      />
 
-        {/* Campo de Nome */}
-        <TextInput
-          style={styles.input}
-          placeholder="Nome"
-          placeholderTextColor="#888"
-          value={firstName}
-          onChangeText={setFirstName}
-        />
-
-        {/* Campo de Sobrenome */}
-        <TextInput
-          style={styles.input}
-          placeholder="Sobrenome"
-          placeholderTextColor="#888"
-          value={lastName}
-          onChangeText={setLastName}
-        />
-
-        {/* Campo de Idade */}
-        <TextInput
-          style={styles.input}
-          placeholder="Idade"
-          placeholderTextColor="#888"
-          value={age}
-          onChangeText={setAge}
-          keyboardType="numeric"
-        />
-
-        {/* Campo de Senha */}
-        <TextInput
-          style={styles.input}
-          placeholder="Senha"
-          placeholderTextColor="#888"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
-
-        {/* Botão de Cadastro */}
-        <TouchableOpacity style={styles.button} onPress={handleNext}>
-          <Text style={styles.buttonText}>Cadastrar</Text>
-        </TouchableOpacity>
-
-        {/* Link para Login */}
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.linkText}>Já tem uma conta? Faça login.</Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </KeyboardAvoidingView>
+      <TouchableOpacity style={styles.button} onPress={handleCadastro}>
+        <Text style={styles.buttonText}>Cadastrar</Text>
+      </TouchableOpacity>
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  scrollContent: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f0f0f0',
     padding: 20,
-    flexGrow: 1,
+    backgroundColor: '#333',
   },
-  welcomeText: {
-    fontSize: 28,
+  title: {
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 40,
-    color: '#333',
-    textAlign: 'center',
+    color: '#fff',
+    marginBottom: 20,
   },
   input: {
     width: '100%',
-    height: 50,
     backgroundColor: '#fff',
+    padding: 15,
     borderRadius: 8,
-    paddingHorizontal: 15,
     marginBottom: 15,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    fontSize: 16,
-    color: '#333',
   },
   button: {
     width: '100%',
-    height: 50,
-    backgroundColor: '#4B0082',
+    backgroundColor: '#6200ee',
+    padding: 15,
     borderRadius: 8,
-    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
   },
   buttonText: {
-    color: '#FFD700',
-    fontSize: 18,
+    color: '#fff',
     fontWeight: 'bold',
-  },
-  linkText: {
-    marginTop: 20,
     fontSize: 16,
-    color: '#4B0082',
-    textDecorationLine: 'underline',
   },
 });
+
+export default Cadastro;

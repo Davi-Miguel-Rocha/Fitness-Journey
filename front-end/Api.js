@@ -1,48 +1,23 @@
-// api.js
+// front-end/Api.js
 
-const API_URL = 'http://localhost:8080/usuarios'; // URL do seu controlador de usuário
+const API_BASE_URL = 'http://192.168.15.123:8080/api/usuarios';
 
-/**
- * Envia o nome do usuário para o endpoint de cadastro como um parâmetro de URL.
- * @param {string} userName - O nome do usuário.
- */
-export async function registerUser(userName) {
+export const cadastrarUsuario = async (nome) => {
   try {
-    // Adiciona o nome do usuário como um parâmetro de consulta na URL
-    const response = await fetch(`${API_URL}?nome=${userName}`, {
-      method: 'POST', // O método HTTP POST
+    const response = await fetch(API_BASE_URL, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({ nome }),
     });
 
-    const data = await response.json(); // Converte a resposta do servidor para JSON
-
-    if (response.ok) {
-      return { success: true, data };
-    } else {
-      return { success: false, error: data.message || 'Erro no cadastro.' };
+    if (!response.ok) {
+      throw new Error('Erro no cadastro. Verifique os dados.');
     }
+    return await response.json(); // Retorna os dados do usuário criado
   } catch (error) {
-    return { success: false, error: 'Erro de conexão. Tente novamente.' };
+    console.error('Erro ao conectar com a API:', error);
+    throw error;
   }
-}
-
-/**
- * Consulta um usuário pelo ID.
- * @param {number} userId - O ID do usuário.
- */
-export async function getUserById(userId) {
-  try {
-    const response = await fetch(`${API_URL}/${userId}`);
-    const data = await response.json();
-
-    if (response.ok) {
-      return { success: true, data };
-    } else {
-      return { success: false, error: data.message || 'Usuário não encontrado.' };
-    }
-  } catch (error) {
-    return { success: false, error: 'Erro de conexão. Tente novamente.' };
-  }
-}
+};
