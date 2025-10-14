@@ -12,8 +12,8 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     // Criar usuário
-    public Usuario createUsuario(String nome) {
-        Usuario usuario = new Usuario(nome);
+    public Usuario createUsuario(Usuario usuario) {
+       // Usuario usuario = new Usuario(nome);
         return usuarioRepository.save(usuario);
     }
 
