@@ -9,7 +9,24 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSMotionUsageDescription": "Este app precisa acessar os dados de movimento do dispositivo para contar seus passos.",
+        "NSCameraUsageDescription": "Este app precisa acessar a câmera para você poder tirar fotos de perfil.",
+        "NSPhotoLibraryUsageDescription": "Este app precisa acessar sua galeria de fotos para você poder selecionar uma foto de perfil."
+      }
+    },
+    "android": {
+      "permissions": [
+        "ACTIVITY_RECOGNITION",
+        "android.permission.ACTIVITY_RECOGNITION",
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/logo.png"
     }
   }
 }
