@@ -1,0 +1,257 @@
+# 🏃 Fitness Journey
+
+Um aplicativo móvel de saúde e fitness que monitora e calcula os passos do usuário em tempo real, ajudando a manter um estilo de vida ativo através do acompanhamento de atividades físicas diárias.
+
+## 📱 Sobre o Projeto
+
+O **Fitness Journey** é uma aplicação completa que combina um frontend mobile desenvolvido com React Native (Expo) e um backend REST API construído com Spring Boot. O app permite que os usuários:
+
+- 📊 Monitorem seus passos em tempo real
+- 🎯 Definam e acompanhem metas diárias de passos
+- 👤 Criem e gerenciem suas contas de usuário
+- 📈 Visualizem seu progresso através de gráficos e barras de progresso
+
+## ✨ Funcionalidades
+
+### Frontend (React Native)
+- ✅ **Contador de Passos em Tempo Real**: Utiliza sensores do dispositivo para contar passos automaticamente
+- ✅ **Sistema de Autenticação**: Login e cadastro de usuários integrado com Supabase
+- ✅ **Definição de Metas**: Permite ao usuário definir sua meta diária de passos
+- ✅ **Visualização de Progresso**: Barra de progresso visual mostrando a porcentagem da meta alcançada
+- ✅ **Perfil de Usuário**: Gerenciamento de perfil com foto e informações pessoais
+- ✅ **Interface Moderna**: UI/UX intuitiva e responsiva
+
+### Backend (Spring Boot)
+- ✅ **API REST**: Endpoints para registro de passos e gerenciamento de usuários
+- ✅ **Persistência de Dados**: Armazenamento de dados de passos e usuários
+- ✅ **Arquitetura em Camadas**: Controller, Service e Repository bem estruturados
+
+## 🛠️ Tecnologias Utilizadas
+
+### Frontend
+- **React Native** (0.81.5) - Framework para desenvolvimento mobile
+- **Expo** (~54.0.23) - Plataforma e ferramentas para React Native
+- **Expo Sensors** (~15.0.7) - Acesso aos sensores do dispositivo (pedômetro)
+- **React Navigation** (^6.1.18) - Navegação entre telas
+- **Supabase** (^2.81.0) - Backend as a Service para autenticação e banco de dados
+- **AsyncStorage** (^2.2.0) - Armazenamento local de dados
+- **React Native Progress** (^5.0.1) - Componentes de progresso visual
+
+### Backend
+- **Spring Boot** (3.5.4) - Framework Java para desenvolvimento de APIs
+- **Spring Data JPA** - Abstração para acesso a dados
+- **H2 Database** - Banco de dados em memória (desenvolvimento)
+- **Java** (21) - Linguagem de programação
+
+## 📁 Estrutura do Projeto
+
+```
+Fitness-Journey-main/
+├── front-end/                    # Aplicativo React Native
+│   ├── assets/                   # Imagens e recursos
+│   │   └── logo.png
+│   ├── components/               # Componentes reutilizáveis
+│   │   └── StepCounter.js        # Componente do contador de passos
+│   ├── contexts/                 # Contextos React
+│   │   └── AuthContext.js        # Contexto de autenticação
+│   ├── lib/                      # Bibliotecas e configurações
+│   │   └── supabase.js           # Configuração do Supabase
+│   ├── screens/                  # Telas da aplicação
+│   │   ├── App.js                # Navegação principal
+│   │   ├── SplashScreen.js       # Tela de carregamento
+│   │   ├── LoginScreen.js        # Tela de login
+│   │   ├── SingUp.js             # Tela de cadastro
+│   │   ├── MenuScreen.js         # Menu principal
+│   │   ├── SetGoalScreen.js      # Definir meta diária
+│   │   └── StepCounterScreen.js  # Tela do contador
+│   ├── app.json                  # Configuração do Expo
+│   ├── package.json              # Dependências do frontend
+│   └── index.js                  # Ponto de entrada
+│
+└── backend/                      # API Spring Boot
+    └── JFproject/
+        ├── src/
+        │   └── main/
+        │       ├── java/org/jf/
+        │       │   ├── Aplication.java          # Classe principal
+        │       │   ├── controller/              # Controllers REST
+        │       │   │   ├── PassoController.java
+        │       │   │   └── UsuarioController.java
+        │       │   ├── entity/                 # Entidades JPA
+        │       │   │   ├── Passo.java
+        │       │   │   └── Usuario.java
+        │       │   ├── repository/              # Repositórios
+        │       │   │   ├── PassoRepository.java
+        │       │   │   └── UsuarioRepository.java
+        │       │   └── service/                # Lógica de negócio
+        │       │       ├── PassoService.java
+        │       │       └── UsuarioService.java
+        │       └── resources/
+        │           └── aplicattion properties/
+        │               └── aplicattion.properties
+        └── pom.xml                              # Dependências Maven
+```
+
+## 📋 Pré-requisitos
+
+Antes de começar, você precisará ter instalado:
+
+- **Node.js** (versão 18 ou superior)
+- **npm** ou **yarn**
+- **Java JDK** (versão 21)
+- **Maven** (para o backend)
+- **Expo CLI** (`npm install -g expo-cli`)
+- **Conta no Supabase** (para autenticação e banco de dados)
+
+## 🚀 Instalação e Configuração
+
+### 1. Clone o repositório
+
+```bash
+git clone <url-do-repositorio>
+cd Fitness-Journey-main
+```
+
+### 2. Configuração do Frontend
+
+```bash
+cd front-end
+npm install
+```
+
+#### Configurar variáveis de ambiente
+
+Crie um arquivo `.env` na pasta `front-end` com as seguintes variáveis:
+
+```env
+EXPO_PUBLIC_SUPABASE_URL=sua_url_do_supabase
+EXPO_PUBLIC_SUPABASE_ANON_KEY=sua_chave_anonima
+```
+
+#### Configurar Supabase
+
+1. Acesse o painel do Supabase e crie um novo projeto
+2. Execute o script SQL em `supabase-setup.sql` no SQL Editor do Supabase
+3. Configure as políticas de segurança (RLS) conforme necessário
+
+### 3. Configuração do Backend
+
+```bash
+cd backend/JFproject
+mvn clean install
+```
+
+## ▶️ Como Executar
+
+### Frontend
+
+```bash
+cd front-end
+npm start
+```
+
+Ou para executar em uma plataforma específica:
+
+```bash
+npm run android    # Para Android
+npm run ios        # Para iOS
+npm run web        # Para Web (limitado - pedômetro não funciona)
+```
+
+**Nota**: O contador de passos funciona apenas em dispositivos móveis (Android/iOS), pois requer acesso aos sensores do dispositivo.
+
+### Backend
+
+```bash
+cd backend/JFproject
+mvn spring-boot:run
+```
+
+O servidor estará disponível em `http://localhost:8080`
+
+## 📱 Funcionalidades Detalhadas
+
+### Contador de Passos
+- Monitora passos em tempo real usando o pedômetro do dispositivo
+- Animação suave do contador
+- Exibe progresso em relação à meta diária
+- Barra de progresso visual
+- Solicita permissões necessárias automaticamente
+
+### Autenticação
+- Cadastro de novos usuários
+- Login seguro com Supabase
+- Recuperação de senha
+- Sessão persistente (mantém login após fechar o app)
+
+### Metas Diárias
+- Definição personalizada de meta de passos
+- Armazenamento local da meta
+- Acompanhamento visual do progresso
+
+## 🔒 Permissões Necessárias
+
+### Android
+- `ACTIVITY_RECOGNITION` - Para contar passos
+- `CAMERA` - Para tirar foto de perfil
+- `READ_EXTERNAL_STORAGE` / `WRITE_EXTERNAL_STORAGE` - Para acessar galeria
+
+### iOS
+- `NSMotionUsageDescription` - Para contar passos
+- `NSCameraUsageDescription` - Para tirar foto de perfil
+- `NSPhotoLibraryUsageDescription` - Para acessar galeria
+
+## 🐛 Troubleshooting
+
+### Problemas Comuns
+
+**Pedômetro não funciona**
+- Verifique se as permissões foram concedidas nas configurações do dispositivo
+- Certifique-se de estar executando em um dispositivo físico (não funciona em emuladores)
+- Alguns dispositivos podem não ter suporte ao pedômetro
+
+**Erro de autenticação**
+- Verifique se as variáveis de ambiente estão configuradas corretamente
+- Confirme que a tabela `profiles` foi criada no Supabase
+- Verifique as políticas RLS no Supabase
+
+**Erro ao iniciar o app**
+- Execute `npm install` novamente na pasta `front-end`
+- Limpe o cache: `expo start -c`
+- Verifique se todas as dependências estão instaladas
+
+## 📚 Documentação Adicional
+
+- [Documentação do Expo](https://docs.expo.dev/)
+- [Documentação do React Native](https://reactnative.dev/)
+- [Documentação do Supabase](https://supabase.com/docs)
+- [Documentação do Spring Boot](https://spring.io/projects/spring-boot)
+
+## 🤝 Contribuindo
+
+Contribuições são bem-vindas! Sinta-se à vontade para:
+
+1. Fazer um fork do projeto
+2. Criar uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abrir um Pull Request
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+
+## 👥 Autores
+
+- **Equipe de Desenvolvimento** - *Desenvolvimento inicial*
+
+## 🙏 Agradecimentos
+
+- Expo pela plataforma incrível
+- Supabase pelo backend as a service
+- Comunidade React Native
+
+---
+
+**Desenvolvido com ❤️ para promover um estilo de vida mais saudável e ativo!**
+
